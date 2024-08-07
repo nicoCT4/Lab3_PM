@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
+/**
+ * Clase principal de la actividad que maneja la lógica de la interfaz de usuario para una calculadora simple.
+ */
 class MainActivity : AppCompatActivity() {
     lateinit var tv_num1: TextView
     lateinit var tv_num2: TextView
@@ -23,11 +26,13 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        // Inicializa las vistas de texto y los botones
         tv_num1 = findViewById(R.id.tv_num1)
         tv_num2 = findViewById(R.id.tv_num2)
         val btnBorrar: Button = findViewById(R.id.btnC)
         val btnIgual: Button = findViewById(R.id.btnIgual)
 
+        // Establece el listener para el botón Igual
         btnIgual.setOnClickListener {
             val expresionInfija = tv_num2.text.toString()
             tv_num1.text = expresionInfija  // Mueve la operación completa a tv_num1
@@ -48,12 +53,16 @@ class MainActivity : AppCompatActivity() {
 
 
 
+        // Establece el listener para el botón Borrar
         btnBorrar.setOnClickListener {
             tv_num1.text = ""
             tv_num2.text = ""
         }
 
     }
+    /**
+     * Maneja la entrada de dígitos y símbolos (incluyendo paréntesis y punto).
+     */
     fun presionarDigito(view: View) {
         var num2: String = tv_num2.text.toString()
 
@@ -74,6 +83,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Maneja la entrada de operadores matemáticos, asegurando que solo se añadan si es lógicamente apropiado.
+     */
     fun clickOperacion(view: View) {
         val currentText = tv_num2.text.toString()
         val lastChar = if (currentText.isNotEmpty()) currentText.last() else ' '
